@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local';
 import "./globals.css";
+import { Inter } from 'next/font/google';
+import GridLines from "./components/gridLines/GridLines";
 
+const darkline = localFont({
+  src: '../public/fonts/Darkline.ttf', 
+  variable: '--font-darkline', 
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter', 
 });
 
 const geistMono = Geist_Mono({
@@ -25,9 +36,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${darkline.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <GridLines />
+        {children}
+        </body>
     </html>
   );
 }
